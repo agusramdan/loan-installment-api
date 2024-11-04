@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,8 +18,8 @@ public class LoanInstallment {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "simulation_id", nullable = true)
-    private Long simulationId;
+    @Column(name = "info_id")
+    private Long infoId;
 
 //    @Column(name = "deleted", nullable = false)
 //    protected Boolean deleted = false;

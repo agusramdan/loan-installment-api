@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -46,7 +45,7 @@ public class LoanInstallmentController {
     public ResponseEntity<LoanInstallment> createLoanInstallment(@RequestBody LoanInstallment loanInstallment) {
         try {
             LoanInstallment _loanInstallment = loanInstallmentRepository.save(loanInstallment);
-            return ResponseEntity.status(HttpStatus.CREATED).body(loanInstallment);
+            return ResponseEntity.status(HttpStatus.CREATED).body(_loanInstallment);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -59,7 +58,6 @@ public class LoanInstallmentController {
             throws ResourceNotFoundException {
         LoanInstallment loanInstallment = loanInstallmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Loan Installment not found for this id :: " + id));
-        //todo mapping copy avoid null value set
         BeanUtils.copyNonNullProperties(_loanInstallment,loanInstallment);
         loanInstallment = loanInstallmentRepository.save(loanInstallment);
         return ResponseEntity.ok().body(loanInstallment);
