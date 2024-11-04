@@ -1,0 +1,54 @@
+---
+spring:
+  application:
+    name: loan-simulation-api
+  profiles:
+    active: dev
+
+---
+server:
+  port: 8180
+  error:
+    include-stacktrace: never
+  servlet:
+    session:
+      cookie:
+        http-only: true
+# 1 days = 1 * 24 * 60 * 60
+cookie:
+  maxAge: 86400
+
+management:
+  server:
+    port: 7180
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+  security:
+    enabled: false
+
+spring:
+  jmx:
+    enabled: true
+  main:
+    lazy-initialization: true
+  jpa:
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _hist
+            #revision_field_name: rev
+            #revision_type_field_name: revtype
+            store_data_at_delete: true
+  flyway:
+    enabled: false
+
+feign:
+  hystrix:
+    enabled: true
+
