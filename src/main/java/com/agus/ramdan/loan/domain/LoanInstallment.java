@@ -22,6 +22,11 @@ public class LoanInstallment {
     @JsonProperty(index = 1)
     private Long id;
 
+    @Column(name = "info_id")
+    @JsonProperty(value = "info_id", index = 2)
+    @Schema(name = "info_id", example = "1", required = true)
+    private Long infoId;
+
     @Column(name = "paid_instalment", precision = 12, scale = 2, nullable = false)
     @Schema(description = "Paid instalment is principal + interest ", example = "100.00", required = true)
     @JsonProperty(value = "paid_instalment", index = 7)
@@ -50,10 +55,7 @@ public class LoanInstallment {
     @Schema(description = "Last Balance principal ", example = "100.00", required = true)
     @JsonProperty(value = "principal_balance", index = 8)
     protected BigDecimal principalBalance;
-    @Column(name = "info_id")
-    @JsonProperty(value = "info_id", index = 2)
-    @Schema(name = "info_id", example = "1", required = true)
-    private Long infoId;
+
 
     //    @Column(name = "last_accrual_date", nullable = false)
 //    protected LocalDate lastAccrualDate;
