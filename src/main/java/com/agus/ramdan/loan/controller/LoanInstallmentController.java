@@ -6,6 +6,7 @@ import com.agus.ramdan.loan.repository.LoanInstallmentRepository;
 import com.agus.ramdan.loan.utils.BeanUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class LoanInstallmentController {
             response = List.class)
     public ResponseEntity<List<LoanInstallment>> getAllLoanInstallments(
             @RequestParam(name = "info_id", required = false) Long infoId) {
-        List<LoanInstallment> loanInstallments = loanInstallmentRepository.findAllByInfoId(infoId);
+        List<LoanInstallment> loanInstallments = loanInstallmentRepository.findAllByInfoId(infoId, Sort.by("number", "id"));
 
         if (loanInstallments.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

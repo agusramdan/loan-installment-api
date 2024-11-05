@@ -22,8 +22,7 @@ public class LoanInfoController {
     @GetMapping("")
     @ApiOperation(value = "Get All Loan Info",
             response = List.class)
-    public ResponseEntity<List<LoanInfo>> getAllLoanInfos(
-            @RequestParam(required = false) Long simulationId) {
+    public ResponseEntity<List<LoanInfo>> getAllLoanInfos() {
         List<LoanInfo> loanInfos = loanInfoRepository.findAll();
         if (loanInfos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
