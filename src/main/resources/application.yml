@@ -3,7 +3,7 @@ spring:
   application:
     name: loan-simulation-api
   profiles:
-    active: dev
+    active: pglocal
 
 ---
 server:

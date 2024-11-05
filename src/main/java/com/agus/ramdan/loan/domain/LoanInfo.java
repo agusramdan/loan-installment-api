@@ -17,19 +17,28 @@ public class LoanInfo {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "disbursement_date")
-    private LocalDate disbursementDate;
-
-    private Integer tenorYear;
+    // tenor OR number of month installment
+    @Column(name = "tenor_months")
     private Integer tenorMonths;
 
-    @Column(name = "maturity_date")
-    private LocalDate maturityDate;
-
+    // percen interest rate per annum
     @Column(name = "interest_rate", precision = 8, scale = 4, nullable = false)
     private BigDecimal interestRate;
 
-    @Column(name = "principal")
-    private BigDecimal principal;
+    // loan amount
+    @Column(name = "amount")
+    private BigDecimal amount;
+
+    //
+    //1. Start-of-Period
+    //2. End-of-Period
+    @Column(name = "payment_method")
+    private String paymentMethod;
+
+    @Column(name = "disbursement_date")
+    private LocalDate disbursementDate;
+
+    @Column(name = "maturity_date")
+    private LocalDate maturityDate;
 
 }
