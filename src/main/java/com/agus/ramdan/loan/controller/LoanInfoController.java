@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/loan")
+@RequestMapping("/api/loan/info")
 public class LoanInfoController {
     @Autowired
     LoanInfoRepository loanInfoRepository;
 
-    @GetMapping("/info")
+    @GetMapping("")
     public ResponseEntity<List<LoanInfo>> getAllLoanInfos(
             @RequestParam(required = false) Long simulationId) {
         try {
@@ -33,7 +33,7 @@ public class LoanInfoController {
         }
     }
 
-    @GetMapping("/info/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<LoanInfo> getLoanInfoById(@PathVariable("id") long id)
             throws ResourceNotFoundException {
         LoanInfo loanInfo = loanInfoRepository.findById(id)
@@ -41,7 +41,7 @@ public class LoanInfoController {
         return ResponseEntity.ok().body(loanInfo);
     }
 
-    @PostMapping("/info")
+    @PostMapping("")
     public ResponseEntity<LoanInfo> createLoanInfo(@RequestBody LoanInfo loanInfo) {
         try {
             LoanInfo _loanInfo = loanInfoRepository.save(loanInfo);
@@ -51,7 +51,7 @@ public class LoanInfoController {
         }
     }
 
-    @PutMapping("/info/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<LoanInfo> updateLoanInfo(
             @PathVariable("id") long id,
             @RequestBody LoanInfo _loanInfo)
@@ -63,7 +63,7 @@ public class LoanInfoController {
         return ResponseEntity.ok().body(loanInfo);
     }
 
-    @DeleteMapping("/info/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteLoanInfo(@PathVariable("id") long id) {
         try {
             loanInfoRepository.deleteById(id);
@@ -73,7 +73,7 @@ public class LoanInfoController {
         }
     }
 
-    @DeleteMapping("/info")
+    @DeleteMapping("")
     public ResponseEntity<HttpStatus> deleteAllLoanInfos() {
         try {
             loanInfoRepository.deleteAll();
@@ -84,7 +84,7 @@ public class LoanInfoController {
 
     }
 
-//  @GetMapping("/info/published")
+//  @GetMapping("/published")
 //  public ResponseEntity<List<LoanInfo>> findByPublished() {
 //    try {
 //      List<LoanInfo> LoanInfos =  loanInfoService.findByPublished(true);

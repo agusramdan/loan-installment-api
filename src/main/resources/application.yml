@@ -3,7 +3,7 @@ spring:
   application:
     name: loan-installment-api
   profiles:
-    active: pg
+    active: dev
 
 ---
 server:
