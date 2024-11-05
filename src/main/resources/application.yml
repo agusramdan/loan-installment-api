@@ -1,9 +1,9 @@
 ---
 spring:
   application:
-    name: loan-simulation-api
+    name: loan-installment-api
   profiles:
-    active: pglocal
+    active: pg
 
 ---
 server:
