@@ -1,203 +1,211 @@
 {
-  "info": {
-    "_postman_id": "8e373d4f-b7bf-4b25-832e-b3eb90823cc5",
-    "name": "Loan",
-    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-    "_exporter_id": "19057916"
-  },
-  "item": [
-    {
-      "name": "LoanInstallment",
-      "item": [
-        {
-          "name": "LoanInstallment All",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8180/api/loan/installment?info_id=1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8180",
-              "path": [
-                "api",
-                "loan",
-                "installment"
-              ],
-              "query": [
-                {
-                  "key": "info_id",
-                  "value": "1"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Create LoanInstallment",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"info_id\" : 1,\r\n    \"number\":1,\r\n    \"maturity_date\":\"2025-01-05\",\r\n    \"principal\": 10000.00,\r\n    \"interest\": 4000.00,\r\n    \"paid_instalment\": 14000.00,\r\n    \"principal_balance\": 2000000\r\n    }",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "http://localhost:8180/api/loan/installment"
-          },
-          "response": []
-        },
-        {
-          "name": "Update LoanInstallment All Copy",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n   \"principal_balance\": 2000001\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "http://localhost:8180/api/loan/installment/1"
-          },
-          "response": []
-        },
-        {
-          "name": "LoanInstallment Get Id=1",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8180/api/loan/installment/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8180",
-              "path": [
-                "api",
-                "loan",
-                "installment",
-                "1"
-              ],
-              "query": [
-                {
-                  "key": "id",
-                  "value": null,
-                  "disabled": true
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "LoanInfo",
-      "item": [
-        {
-          "name": "LoanInfo All",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": "http://localhost:8180/api/loan/info"
-          },
-          "response": []
-        },
-        {
-          "name": "Create Info",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"tenor_months\" : 12,\r\n    \"interest_rate\": 18,\r\n    \"payment_method\": \"End-of-Period\",\r\n    \"disbursement_date\":\"2025-01-05\",\r\n    \"maturity_date\":\"2026-01-05\",\r\n    \"amount\": 100000.00\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "http://localhost:8180/api/loan/info"
-          },
-          "response": []
-        },
-        {
-          "name": "LoanInstallment All Copy",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": "http://localhost:8180/api/loan/installment"
-          },
-          "response": []
-        },
-        {
-          "name": "LoanInstallment Get Id=1",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8180/api/loan/installment/{id}?id",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8180",
-              "path": [
-                "api",
-                "loan",
-                "installment",
-                "{id}"
-              ],
-              "query": [
-                {
-                  "key": "id",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "localhost:8080/api/tutorials",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": "localhost:8080/api/tutorials"
-      },
-      "response": []
-    },
-    {
-      "name": "http://localhost:8080/api/tutorials",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n\r\n    \r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8080/api/tutorials"
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "8e373d4f-b7bf-4b25-832e-b3eb90823cc5",
+		"name": "Loan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19057916"
+	},
+	"item": [
+		{
+			"name": "LoanInstallment",
+			"item": [
+				{
+					"name": "LoanInstallment All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/api/loan/installment?info_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"api",
+								"loan",
+								"installment"
+							],
+							"query": [
+								{
+									"key": "info_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create LoanInstallment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"info_id\" : 1,\r\n    \"number\":1,\r\n    \"maturity_date\":\"2025-01-05\",\r\n    \"principal\": 10000.00,\r\n    \"interest\": 4000.00,\r\n    \"paid_instalment\": 14000.00,\r\n    \"principal_balance\": 2000000\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8180/api/loan/installment"
+					},
+					"response": []
+				},
+				{
+					"name": "Create LoanInstallment Copy",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update LoanInstallment All Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"principal_balance\": 2000001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8180/api/loan/installment/1"
+					},
+					"response": []
+				},
+				{
+					"name": "LoanInstallment Get Id=1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/api/loan/installment/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"api",
+								"loan",
+								"installment",
+								"1"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LoanInfo",
+			"item": [
+				{
+					"name": "LoanInfo All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8180/api/loan/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tenor_months\" : 12,\r\n    \"interest_rate\": 18,\r\n    \"amortization\": \"FLAT INSTALLMENT\",\r\n    \"payment_method\": \"In-Arrear / Bayar Bln Berikut\",\r\n    \"disbursement_date\":\"2025-01-05\",\r\n    \"maturity_date\":\"2026-01-05\",\r\n    \"amount\": 100000.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8180/api/loan/info"
+					},
+					"response": []
+				},
+				{
+					"name": "LoanInstallment All Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8180/api/loan/installment"
+					},
+					"response": []
+				},
+				{
+					"name": "LoanInstallment Get Id=1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/api/loan/installment/{id}?id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"api",
+								"loan",
+								"installment",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "localhost:8080/api/tutorials",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/tutorials"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tutorials",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/tutorials"
+			},
+			"response": []
+		}
+	]
 }
