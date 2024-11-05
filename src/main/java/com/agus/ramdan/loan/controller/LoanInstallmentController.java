@@ -20,7 +20,7 @@ public class LoanInstallmentController {
 
     @GetMapping("")
     @ApiOperation(value = "Get Loan Installment",
-            response = LoanInstallment.class)
+            response = List.class)
     public ResponseEntity<List<LoanInstallment>> getAllLoanInstallments(
             @RequestParam(name = "info_id", required = false) Long infoId) {
         List<LoanInstallment> loanInstallments = loanInstallmentRepository.findAllByInfoId(infoId);
@@ -33,6 +33,8 @@ public class LoanInstallmentController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "Get Loan Installment By Id",
+            response = LoanInstallment.class)
     public ResponseEntity<LoanInstallment> getLoanInstallmentById(@PathVariable("id") long id)
             throws ResourceNotFoundException {
         LoanInstallment loanInstallment = loanInstallmentRepository.findById(id)
@@ -63,6 +65,7 @@ public class LoanInstallmentController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Delete Loan Installment By Id")
     public ResponseEntity<HttpStatus> deleteLoanInstallment(@PathVariable("id") long id) {
         loanInstallmentRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
