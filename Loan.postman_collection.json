@@ -43,7 +43,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"info_id\" : 1,\r\n    \"number\":1,\r\n    \"maturity_date\":\"2025-01-05\",\r\n    \"principal\": 10000.00,\r\n    \"interest\": 4000.00\r\n}",
+              "raw": "{\r\n    \"info_id\" : 1,\r\n    \"number\":1,\r\n    \"maturity_date\":\"2025-01-05\",\r\n    \"principal\": 10000.00,\r\n    \"interest\": 4000.00,\r\n    \"paid_instalment\": 14000.00,\r\n    \"principal_balance\": 2000000\r\n    }",
               "options": {
                 "raw": {
                   "language": "json"
@@ -55,21 +55,30 @@
           "response": []
         },
         {
-          "name": "LoanInstallment All Copy",
+          "name": "Update LoanInstallment All Copy",
           "request": {
-            "method": "GET",
+            "method": "PUT",
             "header": [],
-            "url": "http://localhost:8180/api/loan/installment"
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"principal_balance\": 2000001\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8180/api/loan/installment/1"
           },
           "response": []
         },
         {
           "name": "LoanInstallment Get Id=1",
           "request": {
-            "method": "GET",
+            "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:8180/api/loan/installment/{id}?id",
+              "raw": "http://localhost:8180/api/loan/installment/1",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -79,12 +88,13 @@
                 "api",
                 "loan",
                 "installment",
-                "{id}"
+                "1"
               ],
               "query": [
                 {
                   "key": "id",
-                  "value": null
+                  "value": null,
+                  "disabled": true
                 }
               ]
             }
