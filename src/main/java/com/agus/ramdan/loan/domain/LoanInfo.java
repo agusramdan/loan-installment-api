@@ -14,8 +14,8 @@ import java.time.LocalDate;
 @Table(name = "loan_info")
 public class LoanInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     @JsonProperty(index = 1)
     private Long id;
 
