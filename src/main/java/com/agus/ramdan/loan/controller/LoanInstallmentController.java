@@ -23,17 +23,13 @@ public class LoanInstallmentController {
             response = LoanInstallment.class)
     public ResponseEntity<List<LoanInstallment>> getAllLoanInstallments(
             @RequestParam(name = "info_id", required = false) Long infoId) {
-        try {
-            List<LoanInstallment> loanInstallments = loanInstallmentRepository.findAllByInfoId(infoId);
+        List<LoanInstallment> loanInstallments = loanInstallmentRepository.findAllByInfoId(infoId);
 
-            if (loanInstallments.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(loanInstallments, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        if (loanInstallments.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+
+        return new ResponseEntity<>(loanInstallments, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -48,12 +44,8 @@ public class LoanInstallmentController {
     @ApiOperation(value = "Create Loan Installment",
             response = LoanInstallment.class)
     public ResponseEntity<LoanInstallment> createLoanInstallment(@RequestBody LoanInstallment loanInstallment) {
-        try {
-            LoanInstallment _loanInstallment = loanInstallmentRepository.save(loanInstallment);
-            return ResponseEntity.status(HttpStatus.CREATED).body(_loanInstallment);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        LoanInstallment _loanInstallment = loanInstallmentRepository.save(loanInstallment);
+        return ResponseEntity.status(HttpStatus.CREATED).body(_loanInstallment);
     }
 
     @PutMapping("/{id}")
@@ -72,36 +64,7 @@ public class LoanInstallmentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteLoanInstallment(@PathVariable("id") long id) {
-        try {
-            loanInstallmentRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        loanInstallmentRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-//    @DeleteMapping("/installment")
-//    public ResponseEntity<HttpStatus> deleteAllLoanInstallments() {
-//        try {
-//            loanInstallmentRepository.deleteAll();
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//
-//    }
-
-//  @GetMapping("/installment/published")
-//  public ResponseEntity<List<LoanInstallment>> findByPublished() {
-//    try {
-//      List<LoanInstallment> LoanInstallments =  loanInstallmentService.findByPublished(true);
-//
-//      if (LoanInstallments.isEmpty()) {
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//      }
-//      return new ResponseEntity<>(LoanInstallments, HttpStatus.OK);
-//    } catch (Exception e) {
-//      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-//  }
 }
