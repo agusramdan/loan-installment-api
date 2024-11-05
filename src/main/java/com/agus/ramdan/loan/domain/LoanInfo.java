@@ -1,6 +1,7 @@
 package com.agus.ramdan.loan.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "loan_info")
+@Schema
 public class LoanInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

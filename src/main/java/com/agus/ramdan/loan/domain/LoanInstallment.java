@@ -1,8 +1,7 @@
 package com.agus.ramdan.loan.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,40 +13,38 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "loan_installment")
-@ApiModel
+@Schema
 public class LoanInstallment {
 
     //    @Column(name = "deleted", nullable = false)
     //    protected Boolean deleted = false;
-    @Column(name = "principal", precision = 12, scale = 2, nullable = false)
-    @ApiModelProperty(example = "10000.00", required = true)
-    @JsonProperty(index = 5)
-    protected BigDecimal principal;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")
     @JsonProperty(index = 1)
-    @ApiModelProperty
     private Long id;
 
     @Column(name = "number", nullable = false)
-    @ApiModelProperty(name = "Number Installment", example = "1", required = true)
+    @Schema(description = "Number Installment", example = "1", required = true)
     @JsonProperty(index = 3)
     protected Integer number;
-
     @Column(name = "maturity_date", nullable = false)
-    @ApiModelProperty(required = true)
+    @Schema(required = true)
     @JsonProperty(value = "maturity_date", index = 4)
     protected LocalDate maturityDate;
-    @Column(name = "info_id")
-    @JsonProperty(value = "info_id", index = 2)
-    @ApiModelProperty(name = "info_id", example = "1", required = true)
-    private Long infoId;
-
+    @Column(name = "principal", precision = 12, scale = 2, nullable = false)
+    @Schema(example = "10000.00", required = true)
+    @JsonProperty(index = 5)
+    protected BigDecimal principal;
     @Column(name = "interest", precision = 12, scale = 2, nullable = false)
-    @ApiModelProperty(example = "100.00", required = true)
+    @Schema(example = "100.00", required = true)
     @JsonProperty(index = 6)
     protected BigDecimal interest;
+    @Column(name = "info_id")
+    @JsonProperty(value = "info_id", index = 2)
+    @Schema(name = "info_id", example = "1", required = true)
+    private Long infoId;
 
     //    @Column(name = "last_accrual_date", nullable = false)
 //    protected LocalDate lastAccrualDate;
