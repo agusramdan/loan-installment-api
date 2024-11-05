@@ -21,6 +21,11 @@ public class LoanInfo {
     @JsonProperty(index = 1)
     private Long id;
 
+    @Column(name = "amortization")
+    @JsonProperty(value = "amortization", index = 5)
+    @Schema(description = "value of PAT, FLAT, SLIDING, RC FLAT, RC,FLAT LINKAGE,PPBT,FLAT INSTALLMENT,FLAT POKOK SEKALIGUS,FLAT POKOK BUNGA SEKALIGUS")
+    private String amortization;
+
     // tenor OR number of month installment
     @Column(name = "tenor_months")
     @JsonProperty(value = "tenor_months", index = 2)
@@ -36,9 +41,9 @@ public class LoanInfo {
     @JsonProperty(value = "amount", index = 4)
     private BigDecimal amount;
 
-    //
     //1. Start-of-Period
-    //2. End-of-Period
+    //2. In-Arrear / Bayar Bln Berikut
+    @Schema(description = "value of In-Arrear / Bayar Bln Berikut,  In-Advance / Bayar Dimuka")
     @Column(name = "payment_method")
     @JsonProperty(value = "payment_method", index = 5)
     private String paymentMethod;
