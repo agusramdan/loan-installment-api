@@ -4,7 +4,12 @@ import com.agus.ramdan.loan.domain.LoanInfo;
 import com.agus.ramdan.loan.exception.ResourceNotFoundException;
 import com.agus.ramdan.loan.repository.LoanInfoRepository;
 import com.agus.ramdan.loan.utils.BeanUtils;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +25,10 @@ public class LoanInfoController {
     LoanInfoRepository loanInfoRepository;
 
     @GetMapping("")
-    @ApiOperation(value = "Get All Loan Info",
-            response = List.class)
+    @Operation(summary = "Get All Loan Info")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LoanInfo.class)))),
+            @ApiResponse(responseCode = "400", description = "Invalid tag value", content = @Content) })
     public ResponseEntity<List<LoanInfo>> getAllLoanInfos() {
         List<LoanInfo> loanInfos = loanInfoRepository.findAll();
         if (loanInfos.isEmpty()) {
@@ -31,8 +38,11 @@ public class LoanInfoController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Get Loan Info",
-            response = LoanInfo.class)
+    @Operation(summary = "Get Loan Info")
+    @ApiResponses(value = {
+            @ApiResponse(description = "successful operation",content = { @Content(mediaType = "application/json", schema = @Schema(implementation = LoanInfo.class)), })
+    })
+
     public ResponseEntity<LoanInfo> getLoanInfoById(@PathVariable("id") long id)
             throws ResourceNotFoundException {
         LoanInfo loanInfo = loanInfoRepository.findById(id)
@@ -41,16 +51,27 @@ public class LoanInfoController {
     }
 
     @PostMapping("")
-    @ApiOperation(value = "Create Loan Info",
-            response = LoanInfo.class)
+    @Operation(summary = "Create Loan Info")
+    @ApiResponses(value = {
+            @ApiResponse(description = "successful operation",
+                    content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = LoanInfo.class)),
+                             })
+    })
+
     public ResponseEntity<LoanInfo> createLoanInfo(@RequestBody LoanInfo loanInfo) {
         LoanInfo _loanInfo = loanInfoRepository.save(loanInfo);
         return ResponseEntity.status(HttpStatus.CREATED).body(_loanInfo);
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Update Loan Info",
-            response = LoanInfo.class)
+    @Operation(summary = "Update Loan Info")
+    @ApiResponses(value = {
+            @ApiResponse(description = "successful operation",
+                    content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = LoanInfo.class)),
+                    })
+    })
     public ResponseEntity<LoanInfo> updateLoanInfo(
             @PathVariable("id") long id,
             @RequestBody LoanInfo _loanInfo)
@@ -63,7 +84,7 @@ public class LoanInfoController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Delete Loan Info By Id")
+    @Operation(summary = "Delete Loan Info By Id")
     public ResponseEntity<HttpStatus> deleteLoanInfo(@PathVariable("id") long id) {
         loanInfoRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

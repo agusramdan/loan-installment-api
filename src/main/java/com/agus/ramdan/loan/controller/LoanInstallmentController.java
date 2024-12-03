@@ -1,10 +1,16 @@
 package com.agus.ramdan.loan.controller;
 
+import com.agus.ramdan.loan.domain.LoanInfo;
 import com.agus.ramdan.loan.domain.LoanInstallment;
 import com.agus.ramdan.loan.exception.ResourceNotFoundException;
 import com.agus.ramdan.loan.repository.LoanInstallmentRepository;
 import com.agus.ramdan.loan.utils.BeanUtils;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -20,8 +26,10 @@ public class LoanInstallmentController {
     LoanInstallmentRepository loanInstallmentRepository;
 
     @GetMapping("")
-    @ApiOperation(value = "Get Loan Installment",
-            response = List.class)
+    @Operation(summary = "Get Loan Installment")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LoanInstallment.class)))),
+            @ApiResponse(responseCode = "400", description = "Invalid tag value", content = @Content) })
     public ResponseEntity<List<LoanInstallment>> getAllLoanInstallments(
             @RequestParam(name = "info_id", required = false) Long infoId) {
         List<LoanInstallment> loanInstallments = loanInstallmentRepository.findAllByInfoId(infoId, Sort.by("number", "id"));
@@ -34,8 +42,10 @@ public class LoanInstallmentController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Get Loan Installment By Id",
-            response = LoanInstallment.class)
+    @Operation(summary = "Get Loan Installment By Id")
+    @ApiResponses(value = {
+            @ApiResponse(description = "successful operation",content = { @Content(mediaType = "application/json", schema = @Schema(implementation = LoanInstallment.class)), })
+    })
     public ResponseEntity<LoanInstallment> getLoanInstallmentById(@PathVariable("id") long id)
             throws ResourceNotFoundException {
         LoanInstallment loanInstallment = loanInstallmentRepository.findById(id)
@@ -44,16 +54,20 @@ public class LoanInstallmentController {
     }
 
     @PostMapping("")
-    @ApiOperation(value = "Create Loan Installment",
-            response = LoanInstallment.class)
+    @Operation(summary = "Create Loan Installment")
+    @ApiResponses(value = {
+            @ApiResponse(description = "successful operation",content = { @Content(mediaType = "application/json", schema = @Schema(implementation = LoanInstallment.class)), })
+    })
     public ResponseEntity<LoanInstallment> createLoanInstallment(@RequestBody LoanInstallment loanInstallment) {
         LoanInstallment _loanInstallment = loanInstallmentRepository.save(loanInstallment);
         return ResponseEntity.status(HttpStatus.CREATED).body(_loanInstallment);
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Update Loan Installment",
-            response = LoanInstallment.class)
+    @Operation(summary = "Update Loan Installment")
+    @ApiResponses(value = {
+            @ApiResponse(description = "successful operation",content = { @Content(mediaType = "application/json", schema = @Schema(implementation = LoanInstallment.class)), })
+    })
     public ResponseEntity<LoanInstallment> updateLoanInstallment(
             @PathVariable("id") long id,
             @RequestBody LoanInstallment _loanInstallment)
@@ -66,7 +80,7 @@ public class LoanInstallmentController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Delete Loan Installment By Id")
+    @Operation(summary = "Delete Loan Installment By Id")
     public ResponseEntity<HttpStatus> deleteLoanInstallment(@PathVariable("id") long id) {
         loanInstallmentRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
